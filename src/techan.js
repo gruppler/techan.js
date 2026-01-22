@@ -14,3 +14,5 @@ export const techan = {
     scale: scale(d3),
     svg: svg(d3)
 };
+
+export default techan;
