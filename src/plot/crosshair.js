@@ -1,4 +1,4 @@
-export const crosshair = function(d3_select, d3_event, d3_mouse, d3_dispatch, accessor_crosshair, plot, plotMixin) { // Injected dependencies
+export const crosshair = function(d3_select, d3_pointer, d3_dispatch, accessor_crosshair, plot, plotMixin) { // Injected dependencies
   return function() { // Closure function
     var p = {},  // Container for private, direct access mixed in variables
         dispatcher = d3_dispatch('enter', 'out', 'move'),
@@ -59,9 +59,9 @@ export const crosshair = function(d3_select, d3_event, d3_mouse, d3_dispatch, ac
 
     function mousemoveRefresh(selection, pathVerticalSelection, pathHorizontalSelection,
                               xAnnotationSelection, yAnnotationSelection) {
-      return function() {
+      return function(event) {
         // Cache coordinates past this mouse move
-        selection.node().__coord__ = d3_mouse(this);
+        selection.node().__coord__ = d3_pointer(event, this);
         refresh(selection, pathVerticalSelection, pathHorizontalSelection, xAnnotationSelection, yAnnotationSelection);
       };
     }

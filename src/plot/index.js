@@ -27,9 +27,6 @@ import  { williams } from './williams';
 import  { volume } from './volume';
 
 import * as d3 from 'd3';
-function d3_event() {
-  return d3.event;
-}
 
 export const plot = function(d3) {
   var scale = _scale(d3),
@@ -50,7 +47,7 @@ export const plot = function(d3) {
     bollinger: bollinger(accessor.bollinger, plot, plotMixin),
     candlestick: candlestick,
     close: line(accessor.ohlc, plot, plotMixin),
-    crosshair: crosshair(d3.select, d3_event, d3.mouse, d3.dispatch, accessor.crosshair, plot, plotMixin),
+    crosshair: crosshair(d3.select, d3.pointer, d3.dispatch, accessor.crosshair, plot, plotMixin),
     ema: line(accessor.value, plot, plotMixin),
     heikinashi: candlestick,
     ichimoku: ichimoku(d3.area, d3.curveMonotoneX, accessor.ichimoku, plot, plotMixin),
@@ -63,10 +60,10 @@ export const plot = function(d3) {
     sma: line(accessor.value, plot, plotMixin),
     sroc: line(accessor.value, plot, plotMixin, true),
     stochastic: stochastic(accessor.stochastic, plot, plotMixin),
-    supstance: supstance(d3.drag, d3_event, d3.select, d3.dispatch, accessor.supstance, plot, plotMixin),
+    supstance: supstance(d3.drag, d3.select, d3.dispatch, accessor.supstance, plot, plotMixin),
     tick: tick(d3.scaleLinear, d3.extent, accessor.tick, plot, plotMixin),
-    tradearrow: tradearrow(d3.select, d3_functor, d3.mouse, d3.dispatch, accessor.trade, plot, plotMixin, svg.arrow),
-    trendline: trendline(d3.drag, d3_event, d3.select, d3.dispatch, accessor.trendline, plot, plotMixin),
+    tradearrow: tradearrow(d3.select, d3_functor, d3.pointer, d3.dispatch, accessor.trade, plot, plotMixin, svg.arrow),
+    trendline: trendline(d3.drag, d3.select, d3.dispatch, accessor.trendline, plot, plotMixin),
     volume: volume(accessor.volume, plot, plotMixin),
     vwap: line(accessor.value, plot, plotMixin),
     wilderma: line(accessor.value, plot, plotMixin),

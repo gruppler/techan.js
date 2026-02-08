@@ -1,4 +1,4 @@
-export const supstance = function(d3_behavior_drag, d3_event, d3_select, d3_dispatch, accessor_supstance, plot, plotMixin) {  // Injected dependencies
+export const supstance = function(d3_behavior_drag, d3_select, d3_dispatch, accessor_supstance, plot, plotMixin) {  // Injected dependencies
   function Supstance() { // Closure function
     var p = {},  // Container for private, direct access mixed in variables
         dispatch = d3_dispatch('mouseenter', 'mouseout', 'mousemove', 'drag', 'dragstart', 'dragend'),
@@ -53,11 +53,11 @@ export const supstance = function(d3_behavior_drag, d3_event, d3_select, d3_disp
   }
 
   function dragBody(dispatch, accessor, x, y, annotationComposer) {
-    var drag = d3_behavior_drag().subject(function(d) {
+    var drag = d3_behavior_drag().subject(function(event, d) {
       return { x: 0, y: y(accessor(d)) };
     })
-    .on('drag', function(d) {
-      var value = y.invert(d3_event().y),
+    .on('drag', function(event, d) {
+      var value = y.invert(event.y),
           g = d3_select(this.parentNode.parentNode); // Go up to the selected items parent only (not the list of items)
 
       accessor.v(d, value);
